@@ -14,19 +14,9 @@ struct TodosView: View {
         case .loading:
             Text("Loading...")
         case .loaded(let todoManager):
-            if todoManager.isEmpty {
-                Text("Empty")
-            }
-            
-            if !todoManager.isEmpty {
-                TodosList(todoManager: todoManager)
-            }
-            
+            TodosList(viewModel: todoManager)
         case .error:
             Text("Error")
-        }
-        List {
-            
         }
     }
 }

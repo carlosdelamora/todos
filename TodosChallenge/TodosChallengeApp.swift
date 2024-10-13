@@ -11,7 +11,9 @@ import SwiftUI
 struct TodosChallengeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                TodosList(viewModel: TodoListViewModel(todos: TodosStub.todos))
+            }
         }
     }
 }

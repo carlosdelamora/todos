@@ -13,7 +13,7 @@ struct TodosStub {
                 Todo(
                     serverId: $0,
                     id: UUID(),
-                    title: "Todo \($0)",
+                    title: "Todo \($0 ?? -1)",
                     isCompleted: Bool.random()
                 )
             }

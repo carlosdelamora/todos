@@ -10,17 +10,56 @@ struct TodosList: View {
     
     @Environment(\.editMode) private var editMode
 //    @Environment(TodoManager.self) private var todoManager: TodoManager
-    var todoManager: TodoManager
+    @Bindable var viewModel: TodoListViewModel
+    @FocusState private var focusState: Field?
+    
+    enum Field: Hashable {
+        case edit
+        case new
+    }
     
     var body: some View {
-        List {
-            ForEach(todoManager.todos) { todo in
-                Text(todo.title)
+        
+            VStack {
+                List {
+                    Section(header: Text("TODS LIST")) {
+                        EditableTodoSectionContent(
+                            viewModel: viewModel.uncompletedSectionContentViewModel
+                        )
+                        .dropDestination(for: Todo.self) { payload, destinationIndex  in
+                            viewModel.move(
+                                    todos: payload,
+                                    from: &viewModel.completedSectionContentViewModel.todos,
+                                    to: &viewModel.uncompletedSectionContentViewModel.todos,
+                                    destinationIndex: destinationIndex
+                                )
+                        }
+                    }
+                }
+                Button("Add Todo") {
+                    withAnimation {
+                        viewModel.addTodoButtonTapped()
+                    }
+                }
+                .foregroundStyle(Color.accentColor)
+                List {
+                    Section(header: Text("COMPLETED")) {
+                        EditableTodoSectionContent(
+                            viewModel: viewModel.completedSectionContentViewModel
+                        )
+                        .dropDestination(for: Todo.self) { payload, destinationIndex  in
+                            viewModel.move(
+                                todos: payload,
+                                from: &viewModel.uncompletedSectionContentViewModel.todos,
+                                to: &viewModel.completedSectionContentViewModel.todos,
+                                destinationIndex: destinationIndex
+                            )
+                        }
+                    }
+                }
             }
-            .onDelete {
-                todoManager.delete($0)
-            }
-        }
+           
+        
         .toolbar {
 //            Button("Add Todo") {
 //                editMode?.wrappedValue = .active
@@ -28,11 +67,12 @@ struct TodosList: View {
             EditButton()
         }
         .listStyle(PlainListStyle())
+        .environment(\.editMode, $viewModel.editMode)
     }
 }
 
 #Preview {
     NavigationStack {
-        TodosList(todoManager: TodoManager(todos: TodosStub.todos))
+        TodosList(viewModel: TodoListViewModel(todos: TodosStub.todos))
     }
 }

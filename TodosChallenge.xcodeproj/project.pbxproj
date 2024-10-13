@@ -29,9 +29,22 @@
 		CA4455772CBA19FC001AE1CD /* TodosChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CA4455AD2CBB2DFD001AE1CD /* Exceptions for "TodosChallenge" folder in "TodosChallenge" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CA44555C2CBA19FB001AE1CD /* TodosChallenge */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CA44555F2CBA19FB001AE1CD /* TodosChallenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CA4455AD2CBB2DFD001AE1CD /* Exceptions for "TodosChallenge" folder in "TodosChallenge" target */,
+			);
 			path = TodosChallenge;
 			sourceTree = "<group>";
 		};
@@ -402,6 +415,7 @@
 				DEVELOPMENT_TEAM = 5PRK9NET39;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TodosChallenge/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -431,6 +445,7 @@
 				DEVELOPMENT_TEAM = 5PRK9NET39;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TodosChallenge/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

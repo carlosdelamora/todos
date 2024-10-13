@@ -12,7 +12,7 @@ import SwiftUI
 class TodosViewModel {
     
     //MARK: - API
-    private(set) var loadingState: LoadingState<TodoManager> = .loading
+    private(set) var loadingState: LoadingState<TodoListViewModel> = .loading
     
     //MARK: - Constants
     
@@ -27,24 +27,47 @@ enum LoadingState<T> {
     case error(Error)
 }
 
+struct TodoSection: Identifiable {
+    var id: String {
+        title
+    }
+    var title: String
+    var todos: [Todo]
+}
+
 @Observable
-class TodoManager {
+class TodoListViewModel {
     
     //MARK: - API
     
-    var todos: [Todo]
-    
+    var editMode: EditMode = .inactive
+    var uncompletedSectionContentViewModel: EditableTodoSectionContentViewModel
+    var completedSectionContentViewModel: EditableTodoSectionContentViewModel
     init(todos: [Todo]) {
-        self.todos = todos
+        let completedTodos = todos.filter(\.isCompleted)
+        let uncompletedTodos = todos.filter( { !$0.isCompleted })
+        uncompletedSectionContentViewModel = EditableTodoSectionContentViewModel(todos: uncompletedTodos)
+        completedSectionContentViewModel = EditableTodoSectionContentViewModel(todos: completedTodos)
+            
     }
     
-    var isEmpty: Bool {
-        todos.isEmpty
+    
+    func move(todos: [Todo], from: inout [Todo], to: inout [Todo], destinationIndex: Int) {
+        for initalTodo in todos {
+            let todo = initalTodo.toggleCompleted()
+            guard let index = from.firstIndex(where: { $0.id == todo.id }) else { continue }
+            to.insert(todo, at: destinationIndex)
+            from.remove(at: index)
+        }
     }
     
-    func delete(_ todoIds: IndexSet) {
-        todos.remove(atOffsets: todoIds)
+    func addTodoButtonTapped() {
+        uncompletedSectionContentViewModel.isAddingInlineTodo = true
     }
+    
+    
+    
+    
     
     //MARK: - Constants
     

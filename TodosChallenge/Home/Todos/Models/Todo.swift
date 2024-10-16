@@ -23,7 +23,7 @@ struct Todo: Identifiable, Codable {
 extension Todo: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .todo)
-        //ProxyRepresentation(exporting: \.name))
+        ProxyRepresentation(exporting: \.title)
     }
 }
 

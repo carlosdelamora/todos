@@ -12,7 +12,7 @@ struct TodosChallengeApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                TodosList(viewModel: TodoListViewModel(todos: TodosStub.todos))
+                TodosListsContainer(viewModel: TodosListsContainerViewModel(todos: TodosStub.todos))
             }
         }
     }

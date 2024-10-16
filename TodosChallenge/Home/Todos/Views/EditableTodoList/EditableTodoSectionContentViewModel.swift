@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @Observable
 class EditableTodoSectionContentViewModel {
@@ -14,6 +15,7 @@ class EditableTodoSectionContentViewModel {
     var newTodoTitle: String = ""
     var isEditingTodoId: UUID?
     var isAddingInlineTodo = false
+    let bottomId = "bottomId"
     
     init(todos: [Todo]) {
         self.todos = todos
@@ -27,14 +29,18 @@ class EditableTodoSectionContentViewModel {
         todos.move(fromOffsets: indexSet, toOffset: detstination)
     }
     
+    
     func onNewTodoSubmit() {
         isAddingInlineTodo = false
+        createInlineTodo()
+    }
+    
+    /// Called outside by TodosListsContainerViewModel
+    func createInlineTodo() {
         guard !newTodoTitle.isEmpty else { return }
         let newTodo = Todo(serverId: nil, id: UUID(), title: newTodoTitle, isCompleted: false)
         todos.append(newTodo)
         // Clear the textfield for the new inline todo
         newTodoTitle = ""
-        //Hide the textField for the new inline todo
-        isAddingInlineTodo = false
     }
 }

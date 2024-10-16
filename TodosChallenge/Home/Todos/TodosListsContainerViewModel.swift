@@ -12,7 +12,7 @@ import SwiftUI
 class TodosViewModel {
     
     //MARK: - API
-    private(set) var loadingState: LoadingState<TodoListViewModel> = .loading
+    private(set) var loadingState: LoadingState<TodosListsContainerViewModel> = .loading
     
     //MARK: - Constants
     
@@ -35,8 +35,9 @@ struct TodoSection: Identifiable {
     var todos: [Todo]
 }
 
+@MainActor
 @Observable
-class TodoListViewModel {
+class TodosListsContainerViewModel {
     
     //MARK: - API
     
@@ -48,9 +49,7 @@ class TodoListViewModel {
         let uncompletedTodos = todos.filter( { !$0.isCompleted })
         uncompletedSectionContentViewModel = EditableTodoSectionContentViewModel(todos: uncompletedTodos)
         completedSectionContentViewModel = EditableTodoSectionContentViewModel(todos: completedTodos)
-            
     }
-    
     
     func move(todos: [Todo], from: inout [Todo], to: inout [Todo], destinationIndex: Int) {
         for initalTodo in todos {
@@ -62,11 +61,9 @@ class TodoListViewModel {
     }
     
     func addTodoButtonTapped() {
+        uncompletedSectionContentViewModel.createInlineTodo()
         uncompletedSectionContentViewModel.isAddingInlineTodo = true
     }
-    
-    
-    
     
     
     //MARK: - Constants

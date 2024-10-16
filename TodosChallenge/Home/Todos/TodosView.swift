@@ -14,7 +14,7 @@ struct TodosView: View {
         case .loading:
             Text("Loading...")
         case .loaded(let todoManager):
-            TodosList(viewModel: todoManager)
+            TodosListsContainer(viewModel: todoManager)
         case .error:
             Text("Error")
         }

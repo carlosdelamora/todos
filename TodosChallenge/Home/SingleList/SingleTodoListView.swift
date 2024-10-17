@@ -48,7 +48,7 @@ struct SingleTodoListView: View {
                     .onMove(perform: viewModel.onMove)
                     .onChange(of: inlineFocusState) { oldValue, newValue in
                         if newValue == nil {
-                            viewModel.isEditingTodoId = nil // do this in the viewModel
+                            viewModel.isEditingTodoId = nil
                         }
                     }
                     
@@ -116,23 +116,6 @@ struct SingleTodoListView: View {
     }
 }
 
-struct SingleListRow : View {
-    
-    let title: String
-    let isCompleted: Bool
-    let action: () -> Void
-    var body: some View {
-        RowContentView(title) {
-            Button(action: action) {
-                Image(systemName: "checkmark")
-                    .foregroundStyle(isCompleted ? .green : .disabled)
-            }
-            .contentShape(Rectangle())
-            .buttonStyle(PlainButtonStyle())
-        }
-        .rowFrame()
-    }
-}
 
 #Preview {
     SingleTodoListView(viewModel: SingleTodoViewModel(todos: TodosStub.todos))

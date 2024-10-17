@@ -7,16 +7,17 @@
 import Foundation
 import CoreTransferable
 
-struct Todo: Identifiable, Codable {
+class Todo: Identifiable, Codable {
     let serverId: Int?
     let id: UUID
     var title: String
     var isCompleted: Bool
     
-    func toggleCompleted() -> Todo {
-        var mutableSelf = self
-        mutableSelf.isCompleted.toggle()
-        return mutableSelf
+    init(serverId: Int?, id: UUID, title: String, isCompleted: Bool) {
+        self.serverId = serverId
+        self.id = id
+        self.title = title
+        self.isCompleted = isCompleted
     }
 }
 

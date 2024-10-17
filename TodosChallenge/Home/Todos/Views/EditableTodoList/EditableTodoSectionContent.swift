@@ -15,7 +15,6 @@ struct EditableTodoSectionContent: DynamicViewContent {
     @FocusState private var focusState: Field?
     @FocusState private var inlineFocusState: UUID?
     private enum Field: Hashable {
-        case inlineEditing
         case new
     }
     var data: [Todo] { viewModel.todos }

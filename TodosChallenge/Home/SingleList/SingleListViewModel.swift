@@ -22,35 +22,7 @@ class SingleTodoViewModel {
     var isAddingInlineTodo = false
     var isEditingTodoId: UUID?
     let bottomId = "bottomId"
-    
-    func bindTo(todo: Todo) -> Binding<Todo> {
-        let isCompleted = todo.isCompleted
-        if isCompleted {
-            guard let index = completedTodos.firstIndex(where: { $0.id == todo.id }) else {
-                return .constant(todo)
-            }
-//            @Binding var todo = completedTodos[index]
-//            return $todo
-            return Binding<Todo>(get: {
-                self.completedTodos[index]
-            }, set: {
-                print("We did set the binding")
-                self.completedTodos[index] = $0
-            })
-        } else {
-            guard let index = uncompletedTodos.firstIndex(where: { $0.id == todo.id }) else {
-                return .constant(todo)
-            }
-            //uncompletedTodos[index].isCompleted.toggle()
-            return Binding<Todo>(get: {
-                self.uncompletedTodos[index]
-            }, set: {
-                print("We did set the binding uncompleted")
-                self.uncompletedTodos[index] = $0
-            })
-        }
-    }
-    
+        
     init(todos: [Todo]) {
         // It should come sorted from BE
         uncompletedTodos = todos.filter({ !$0.isCompleted })
@@ -77,13 +49,41 @@ class SingleTodoViewModel {
         }
     }
     
-    func addTodoButtonTapped() {
+    func addNewTaskButtonTapped() {
+        if isAddingInlineTodo {
+            createInlineTodo()
+        }
         isAddingInlineTodo = true
     }
     
     func onNewTodoSubmit() {
         isAddingInlineTodo = false
         createInlineTodo()
+    }
+    
+    func onDelete(indexSet: IndexSet) {
+        for index in indexSet {
+            let todo = todos[index]
+            let todos = todo.isCompleted ? completedTodos : uncompletedTodos
+            guard let firstIndex = firstIndex(withId: todo.id, from: todos) else { return }
+            if todo.isCompleted {
+                completedTodos.remove(at: firstIndex)
+            } else {
+                uncompletedTodos.remove(at: firstIndex)
+            }
+        }
+    }
+    
+    func onMove(indexSet: IndexSet, destination: Int) {
+        //todos.move(fromOffsets: indexSet, toOffset: detstination)
+        for index in indexSet {
+            let todo = todos[index]
+            todo.isCompleted = (destination >= uncompletedTodos.count)
+            var mutableTodos = todos
+            mutableTodos.move(fromOffsets: [index], toOffset: destination)
+            uncompletedTodos = mutableTodos.filter({ !$0.isCompleted })
+            completedTodos = mutableTodos.filter({ $0.isCompleted })
+        }
     }
     
     
@@ -100,6 +100,10 @@ class SingleTodoViewModel {
         uncompletedTodos.append(newTodo)
         // Clear the textfield for the new inline todo
         newTodoTitle = ""
+    }
+    
+    private func firstIndex(withId id: UUID, from todos: [Todo]) -> Int? {
+        todos.firstIndex(where: { $0.id == id })
     }
     
 }

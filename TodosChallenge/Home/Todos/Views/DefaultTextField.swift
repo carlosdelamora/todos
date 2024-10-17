@@ -10,7 +10,7 @@ import SwiftUI
 struct DefaultTextField: View {
     @Binding var text: String
     var promptString: String?
-    var onSubmit: ()-> Void
+    var onSubmit: (()-> Void)? = nil
     var body: some View {
         TextField(
             "",
@@ -18,7 +18,7 @@ struct DefaultTextField: View {
             prompt: prompt
         )
         .onSubmit {
-            onSubmit()
+            onSubmit?()
         }
         .font(.custom("AccordAlternate-Medium", size: 16))
     }

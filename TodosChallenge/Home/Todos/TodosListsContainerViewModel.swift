@@ -52,8 +52,8 @@ class TodosListsContainerViewModel {
     }
     
     func move(todos: [Todo], from: inout [Todo], to: inout [Todo], destinationIndex: Int) {
-        for initalTodo in todos {
-            let todo = initalTodo.toggleCompleted()
+        for todo in todos {
+            todo.isCompleted.toggle()
             guard let index = from.firstIndex(where: { $0.id == todo.id }) else { continue }
             to.insert(todo, at: destinationIndex)
             from.remove(at: index)

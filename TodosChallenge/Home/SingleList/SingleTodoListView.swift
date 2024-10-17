@@ -4,7 +4,7 @@ import SwiftUI
 struct SingleTodoListView: View {
     
     @State var viewModel: SingleTodoViewModel
-    @FocusState private var focusState: Field?
+    @FocusState private var newTodoFocusState: Field?
     @FocusState private var inlineFocusState: UUID?
     @State private var scrollProxy: ScrollViewProxy?
 
@@ -32,11 +32,6 @@ struct SingleTodoListView: View {
                                 .onAppear {
                                     inlineFocusState = todo.id
                                 }
-                                .onChange(of: inlineFocusState) { oldValue, newValue in
-                                    if newValue != todo.id {
-                                        viewModel.isEditingTodoId = nil // do this in the viewModel
-                                    }
-                                }
                             } else {
                                 SingleListRow(title: todo.title, isCompleted: todo.isCompleted) {
                                     withAnimation {
@@ -51,34 +46,41 @@ struct SingleTodoListView: View {
                     }
                     .onDelete(perform: viewModel.onDelete)
                     .onMove(perform: viewModel.onMove)
+                    .onChange(of: inlineFocusState) { oldValue, newValue in
+                        if newValue == nil {
+                            viewModel.isEditingTodoId = nil // do this in the viewModel
+                        }
+                    }
                     
                     Group {
-                        if viewModel.isAddingInlineTodo {
+                        if viewModel.isAddingNewTodo {
                             DefaultTextField(text: $viewModel.newTodoTitle , promptString: "What do you want to do?") {
                                 viewModel.onNewTodoSubmit()
                             }
                             .rowFrame()
-                            .focused($focusState, equals: .new)
+                            .focused($newTodoFocusState, equals: .new)
                             .onAppear {
-                                focusState = .new
-                            }
-                            .onChange(of: focusState) { oldValue, newValue in
-                                if newValue != .new {
-                                    //viewModel.isAddingInlineTodo = false // do this in the viewModel
-                                }
+                                newTodoFocusState = .new
                             }
                         }
                     }
                     .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     .id(viewModel.bottomId)
+                    .onChange(of: newTodoFocusState) { oldValue, newValue in
+                        if newValue != .new {
+                            viewModel.isAddingNewTodo = false
+                        }
+                    }
                     .onChange(of: viewModel.newTodoTitle) { _, _ in
                         withAnimation {
                             scrollProxy.scrollTo(viewModel.bottomId)
                         }
                     }
-                    .onChange(of: viewModel.isAddingInlineTodo) { _, _ in
-                        withAnimation {
-                            scrollProxy.scrollTo(viewModel.bottomId)
+                    .onChange(of: viewModel.isAddingNewTodo) { _, isAddingInlineTodo in
+                        if isAddingInlineTodo {
+                            withAnimation {
+                                scrollProxy.scrollTo(viewModel.bottomId)
+                            }
                         }
                     }
                 }

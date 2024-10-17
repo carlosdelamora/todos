@@ -19,7 +19,7 @@ class SingleTodoViewModel {
     }
     
     var newTodoTitle: String = ""
-    var isAddingInlineTodo = false
+    var isAddingNewTodo = false
     var isEditingTodoId: UUID?
     let bottomId = "bottomId"
         
@@ -50,14 +50,14 @@ class SingleTodoViewModel {
     }
     
     func addNewTaskButtonTapped() {
-        if isAddingInlineTodo {
+        if isAddingNewTodo {
             createInlineTodo()
         }
-        isAddingInlineTodo = true
+        isAddingNewTodo = true
     }
     
     func onNewTodoSubmit() {
-        isAddingInlineTodo = false
+        isAddingNewTodo = false
         createInlineTodo()
     }
     

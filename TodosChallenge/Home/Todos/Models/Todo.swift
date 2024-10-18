@@ -7,6 +7,7 @@
 import Foundation
 import CoreTransferable
 
+@Observable
 class Todo: Identifiable, Codable {
     let serverId: Int?
     let id: UUID

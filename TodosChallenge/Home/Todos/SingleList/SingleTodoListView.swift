@@ -21,28 +21,19 @@ struct SingleTodoListView: View {
                 List(selection: $viewModel.isEditingTodoId) {
                     ForEach(viewModel.todos) { todo in
                         Group {
-                            if viewModel.isEditingTodoId == todo.id {
-                                let textBinding = Binding {
-                                    todo.title
-                                } set: {
-                                    todo.title = $0
-                                }
-                                DefaultTextField(
-                                    text: textBinding,
-                                    promptString: nil
-                                )
-                                .focused($inlineFocusState, equals: todo.id )
-                                .rowFrame()
-                                .onAppear {
-                                    inlineFocusState = todo.id
-                                }
-                            } else {
-                                SingleListRow(title: todo.title, isCompleted: todo.isCompleted) {
+                            @Bindable var todo = todo
+                            TextFieldRow(
+                                title: todo.title,
+                                isCompleted: todo.isCompleted,
+                                buttonAction: {
                                     withAnimation {
                                         viewModel.didTappCheckButton(todo: todo)
                                     }
-                                }
-                            }
+                                },
+                                textBinding: $todo.title
+                            )
+                            .focused($inlineFocusState, equals: todo.id )
+                            .rowFrame()
                         }
                         .listRowBackground(Color.backgroundPrimary)
                         .listRowBackground(Color.clear)
@@ -50,11 +41,6 @@ struct SingleTodoListView: View {
                     }
                     .onDelete(perform: viewModel.onDelete)
                     .onMove(perform: viewModel.onMove)
-                    .onChange(of: inlineFocusState) { oldValue, newValue in
-                        if newValue == nil {
-                            viewModel.isEditingTodoId = nil
-                        }
-                    }
                     
                     Group {
                         if viewModel.isAddingNewTodo {
@@ -68,7 +54,6 @@ struct SingleTodoListView: View {
                             }
                         }
                     }
-                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     .id(viewModel.bottomId)
                     .onChange(of: newTodoFocusState) { oldValue, newValue in
                         if newValue != .new {
@@ -106,14 +91,11 @@ struct SingleTodoListView: View {
                     RowContentView("Add task") {
                         Image(systemName: "plus")
                             .fontWeight(.bold)
-                            .frame(minWidth: 24, minHeight: 24)
-                            
                     }
                 }
-               
             }
             .foregroundStyle(Color.disabled)
-            .rowFrame()
+            .frame(height: 56)
             .padding(.horizontal)
             Divider()
         }.toolbar {
@@ -128,7 +110,6 @@ struct SingleTodoListView: View {
                     }
                     Button {
                         viewModel.hideActiveButtonTapped()
-                        // Open Maps and center it on this item.
                     } label: {
                         Label(viewModel.hideUncompletedLabelConfig.title,
                               systemImage: viewModel.hideUncompletedLabelConfig.systemName

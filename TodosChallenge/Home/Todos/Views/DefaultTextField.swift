@@ -15,10 +15,15 @@ struct DefaultTextField: View {
         TextField(
             "",
             text: $text,
-            prompt: prompt
+            prompt: prompt,
+            axis: .vertical
         )
-        .onSubmit {
-            onSubmit?()
+        .onChange(of: text) { oldValue, newValue in
+            if newValue.contains(where: \.isNewline) {
+                text = oldValue
+                hideKeyboard()
+                onSubmit?()
+            }
         }
         .font(.accordMedium)
     }
@@ -28,6 +33,12 @@ struct DefaultTextField: View {
         if let promptString {
             Text(promptString)
         }
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

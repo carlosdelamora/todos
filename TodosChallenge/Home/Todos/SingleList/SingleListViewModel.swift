@@ -12,6 +12,7 @@ import SwiftUI
 @MainActor
 @Observable
 class SingleTodoViewModel {
+    
     //MARK: - API
     
     var todos: [Todo] {
@@ -20,28 +21,23 @@ class SingleTodoViewModel {
         case .uncompleted: completedTodos
         case .completed: uncompletedTodos
         }
-        
     }
     
     var newTodoTitle: String = ""
     var isAddingNewTodo = false
-    var isEditingTodoId: UUID?
     let bottomId = "bottomId"
-    var currentFilter: Filter = .completed
+    
     var hideCompletedLabelConfig: SystemImageLabelConfig {
         let title = isCompletedFiltered ? "Show completed" : "Hide completed"
         let systemName = isCompletedFiltered ? "eye.slash" : "eye.fill"
-        
         return SystemImageLabelConfig(title: title, systemName: systemName)
     }
     
     var hideUncompletedLabelConfig: SystemImageLabelConfig {
         let title = isUncompletedFiltered ? "Show active" : "Hide active"
         let systemName = isUncompletedFiltered ? "eye.slash" : "eye.fill"
-        
         return SystemImageLabelConfig(title: title, systemName: systemName)
     }
-    
     
     enum Filter {
         case none
@@ -53,7 +49,6 @@ class SingleTodoViewModel {
         // It should come sorted from BE
         uncompletedTodos = todos.filter({ !$0.isCompleted })
         completedTodos = todos.filter({ $0.isCompleted })
-        //self.todos = uncompletedTodos + completedTodos
     }
     
     func didTappCheckButton(todo: Todo) {
@@ -101,7 +96,6 @@ class SingleTodoViewModel {
     }
     
     func onMove(indexSet: IndexSet, destination: Int) {
-        //todos.move(fromOffsets: indexSet, toOffset: detstination)
         for index in indexSet {
             let todo = todos[index]
             todo.isCompleted = (destination >= uncompletedTodos.count)
@@ -121,7 +115,7 @@ class SingleTodoViewModel {
     }
     
     //MARK: - Variables
-    
+    private var currentFilter: Filter = .completed
     private var uncompletedTodos: [Todo]
     private var completedTodos: [Todo]
     private var isCompletedFiltered: Bool {

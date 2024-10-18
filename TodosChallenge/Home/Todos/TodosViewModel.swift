@@ -9,6 +9,7 @@ import Combine
 import SwiftUI
 import Factory
 
+@MainActor
 @Observable
 class TodosViewModel {
     
@@ -33,7 +34,6 @@ class TodosViewModel {
     
     @ObservationIgnored
     @Injected(\.todoProvider) var todoProvider
-    
 }
 
 enum LoadingState<T> {

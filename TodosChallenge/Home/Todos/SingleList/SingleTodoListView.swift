@@ -18,7 +18,7 @@ struct SingleTodoListView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollViewReader { scrollProxy in
-                List(selection: $viewModel.isEditingTodoId) {
+                List {
                     ForEach(viewModel.todos) { todo in
                         Group {
                             @Bindable var todo = todo

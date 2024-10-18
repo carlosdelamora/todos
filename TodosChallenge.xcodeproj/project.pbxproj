@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CA5071542CC0B48100AFE832 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = CA5071532CC0B48100AFE832 /* Factory */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CA44556E2CBA19FC001AE1CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA5071542CC0B48100AFE832 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +96,7 @@
 				CA44555F2CBA19FB001AE1CD /* TodosChallenge */,
 				CA4455702CBA19FC001AE1CD /* TodosChallengeTests */,
 				CA44557A2CBA19FC001AE1CD /* TodosChallengeUITests */,
+				CA5071522CC0B48100AFE832 /* Frameworks */,
 				CA44555E2CBA19FB001AE1CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +109,13 @@
 				CA4455772CBA19FC001AE1CD /* TodosChallengeUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CA5071522CC0B48100AFE832 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +138,7 @@
 			);
 			name = TodosChallenge;
 			packageProductDependencies = (
+				CA5071532CC0B48100AFE832 /* Factory */,
 			);
 			productName = TodosChallenge;
 			productReference = CA44555D2CBA19FB001AE1CD /* TodosChallenge.app */;
@@ -587,6 +601,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CA5071532CC0B48100AFE832 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA44559C2CBA1E5C001AE1CD /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CA4455552CBA19FB001AE1CD /* Project object */;
 }

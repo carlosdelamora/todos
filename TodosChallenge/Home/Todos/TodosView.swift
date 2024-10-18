@@ -13,8 +13,11 @@ struct TodosView: View {
         switch viewModel.loadingState {
         case .loading:
             Text("Loading...")
-        case .loaded(let todoManager):
-            SingleTodoListView(viewModel: todoManager)
+                .task {
+                    await viewModel.initalTask()
+                }
+        case .loaded(let todos):
+            SingleTodoListView(todos: todos)
         case .error:
             Text("Error")
         }

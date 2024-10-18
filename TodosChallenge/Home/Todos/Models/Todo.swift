@@ -19,6 +19,10 @@ class Todo: Identifiable, Codable {
         self.title = title
         self.isCompleted = isCompleted
     }
+    
+    convenience init(dto: TodoDTO) {
+        self.init(serverId: dto.serverId, id: UUID(), title: dto.title, isCompleted: dto.completed)
+    }
 }
 
 extension Todo: Transferable {

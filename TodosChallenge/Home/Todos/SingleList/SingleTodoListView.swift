@@ -3,11 +3,15 @@ import SwiftUI
 
 struct SingleTodoListView: View {
     
+    init(todos: [Todo]) {
+        _viewModel = State(wrappedValue: SingleTodoViewModel(todos: todos))
+    }
+    
     @State var viewModel: SingleTodoViewModel
     @FocusState private var newTodoFocusState: Field?
     @FocusState private var inlineFocusState: UUID?
     @State private var scrollProxy: ScrollViewProxy?
-
+    
     private enum Field: Hashable {
         case new
     }
@@ -112,12 +116,38 @@ struct SingleTodoListView: View {
             .rowFrame()
             .padding(.horizontal)
             Divider()
+        }.toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button {
+                        viewModel.hideCompltedButtonTapped()
+                    } label: {
+                        Label(viewModel.hideCompletedLabelConfig.title,
+                              systemImage: viewModel.hideCompletedLabelConfig.systemName
+                        )
+                    }
+                    Button {
+                        viewModel.hideActiveButtonTapped()
+                        // Open Maps and center it on this item.
+                    } label: {
+                        Label(viewModel.hideUncompletedLabelConfig.title,
+                              systemImage: viewModel.hideUncompletedLabelConfig.systemName
+                        )
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .foregroundStyle(Color.accentColor)
+                }
+            }
         }
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
 
 #Preview {
-    SingleTodoListView(viewModel: SingleTodoViewModel(todos: TodosStub.todos))
+    NavigationStack {
+        SingleTodoListView(todos: TodosStub.todos)
+    }
 }
 

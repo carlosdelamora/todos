@@ -14,7 +14,7 @@ struct MediumText: View {
     private let text: String
     var body: some View {
         Text(text)
-            .font(.custom("AccordAlternate-Medium", size: 16))
+            .font(.accordMedium)
     }
 }
 

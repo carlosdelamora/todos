@@ -10,8 +10,7 @@ import SwiftUI
 fileprivate struct RowFrameModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .frame(height: 54)
-            //.frame(maxWidth: .infinity, minHeight: 54)
+            .frame(maxWidth: .infinity, minHeight: 54)
             .alignmentGuide(.listRowSeparatorLeading) { alingments in
                 alingments[.leading] - 16
             }

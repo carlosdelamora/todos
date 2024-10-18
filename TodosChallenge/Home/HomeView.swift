@@ -8,17 +8,27 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var navigationPath = NavigationPath()
+    
+    @State private var homeViewModel = HomeViewModel()
+    
     var body: some View {
-        NavigationStack(path: $navigationPath) {
-            Button("My Todos") {
-                navigationPath.append("mytodo")
+        NavigationStack {
+            List {
+                ForEach(homeViewModel.listInfo) { listInfo in
+                    NavigationLink(value: listInfo.id) {
+                        RowContentView(listInfo.name)
+                    }
+                }
             }
-            .navigationDestination(for: String.self) { _ in
-                TodosView()
+            .navigationDestination(for: ListInfo.ID.self) { id in
+                if let listInfo = homeViewModel.listInfo.first(where: { $0.id == id }) {
+                    TodosView()
+                        .navigationTitle(listInfo.name)
+                }
             }
+        }.task {
+            await homeViewModel.initalTask()
         }
-        
     }
 }
 

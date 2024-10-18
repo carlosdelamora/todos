@@ -15,14 +15,40 @@ class SingleTodoViewModel {
     //MARK: - API
     
     var todos: [Todo] {
-        uncompletedTodos + completedTodos
+        switch currentFilter {
+        case .none: uncompletedTodos + completedTodos
+        case .uncompleted: completedTodos
+        case .completed: uncompletedTodos
+        }
+        
     }
     
     var newTodoTitle: String = ""
     var isAddingNewTodo = false
     var isEditingTodoId: UUID?
     let bottomId = "bottomId"
+    var currentFilter: Filter = .completed
+    var hideCompletedLabelConfig: SystemImageLabelConfig {
+        let title = isCompletedFiltered ? "Show completed" : "Hide completed"
+        let systemName = isCompletedFiltered ? "eye.slash" : "eye.fill"
         
+        return SystemImageLabelConfig(title: title, systemName: systemName)
+    }
+    
+    var hideUncompletedLabelConfig: SystemImageLabelConfig {
+        let title = isUncompletedFiltered ? "Show active" : "Hide active"
+        let systemName = isUncompletedFiltered ? "eye.slash" : "eye.fill"
+        
+        return SystemImageLabelConfig(title: title, systemName: systemName)
+    }
+    
+    
+    enum Filter {
+        case none
+        case uncompleted
+        case completed
+    }
+    
     init(todos: [Todo]) {
         // It should come sorted from BE
         uncompletedTodos = todos.filter({ !$0.isCompleted })
@@ -86,11 +112,25 @@ class SingleTodoViewModel {
         }
     }
     
+    func hideCompltedButtonTapped() {
+        applyOrToggle(filter: .completed)
+    }
+    
+    func hideActiveButtonTapped() {
+        applyOrToggle(filter: .uncompleted)
+    }
     
     //MARK: - Variables
     
     private var uncompletedTodos: [Todo]
     private var completedTodos: [Todo]
+    private var isCompletedFiltered: Bool {
+        currentFilter == .completed
+    }
+    
+    private var isUncompletedFiltered: Bool {
+        currentFilter == .uncompleted
+    }
     
     //MARK: - Implementation
     
@@ -106,4 +146,17 @@ class SingleTodoViewModel {
         todos.firstIndex(where: { $0.id == id })
     }
     
+    private func applyOrToggle(filter: Filter) {
+        if currentFilter == filter {
+            currentFilter = .none
+        } else {
+            currentFilter = filter
+        }
+    }
+    
+}
+
+struct SystemImageLabelConfig {
+    let title: String
+    let systemName: String
 }

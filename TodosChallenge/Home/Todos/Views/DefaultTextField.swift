@@ -20,7 +20,7 @@ struct DefaultTextField: View {
         .onSubmit {
             onSubmit?()
         }
-        .font(.custom("AccordAlternate-Medium", size: 16))
+        .font(.accordMedium)
     }
     
     @ViewBuilder

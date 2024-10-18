@@ -18,6 +18,7 @@ struct SingleListRow : View {
             Button(action: action) {
                 Image(systemName: "checkmark")
                     .foregroundStyle(isCompleted ? .green : .disabled)
+                    .fontWeight(.heavy)
             }
             .contentShape(Rectangle())
             .buttonStyle(PlainButtonStyle())

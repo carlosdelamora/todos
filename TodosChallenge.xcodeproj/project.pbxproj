@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA5071542CC0B48100AFE832 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = CA5071532CC0B48100AFE832 /* Factory */; };
+		CA5071622CC2367400AFE832 /* Modules in Frameworks */ = {isa = PBXBuildFile; productRef = CA5071612CC2367400AFE832 /* Modules */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		CA44555D2CBA19FB001AE1CD /* TodosChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodosChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA44556D2CBA19FC001AE1CD /* TodosChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4455772CBA19FC001AE1CD /* TodosChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA5071602CC2335800AFE832 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Modules; path = ../Modules; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA5071622CC2367400AFE832 /* Modules in Frameworks */,
 				CA5071542CC0B48100AFE832 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +96,7 @@
 		CA4455542CBA19FB001AE1CD = {
 			isa = PBXGroup;
 			children = (
+				CA5071602CC2335800AFE832 /* Modules */,
 				CA44555F2CBA19FB001AE1CD /* TodosChallenge */,
 				CA4455702CBA19FC001AE1CD /* TodosChallengeTests */,
 				CA44557A2CBA19FC001AE1CD /* TodosChallengeUITests */,
@@ -139,6 +143,7 @@
 			name = TodosChallenge;
 			packageProductDependencies = (
 				CA5071532CC0B48100AFE832 /* Factory */,
+				CA5071612CC2367400AFE832 /* Modules */,
 			);
 			productName = TodosChallenge;
 			productReference = CA44555D2CBA19FB001AE1CD /* TodosChallenge.app */;
@@ -434,7 +439,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,7 +469,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,6 +612,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CA44559C2CBA1E5C001AE1CD /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		CA5071612CC2367400AFE832 /* Modules */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Modules;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

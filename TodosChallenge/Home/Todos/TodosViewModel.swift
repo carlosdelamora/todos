@@ -49,40 +49,4 @@ extension Container {
     }
 }
 
-protocol TodoProviding {
-    func todos() async throws -> [TodoDTO]
-}
 
-class TodoProvider: TodoProviding {
-    
-    func todos() async throws -> [TodoDTO] {
-        guard var url = URL(string: "https://jsonplaceholder.typicode.com") else {
-            throw NetworkError
-            .invalidURL}
-        url.append(path: "todos")
-        let request = URLRequest(url: url)
-        let todosDTOs = try await urlRequest(responseType: [TodoDTO].self, request: request)
-        return Array(todosDTOs.filter({ $0.userId == 3 }).prefix(5))
-    }
-    
-    enum NetworkError: Error {
-        case invalidURL
-        case invalidResponse
-        case httpError(Int)
-    }
-    
-    private func urlRequest<T: Decodable>(responseType: T.Type, request: URLRequest) async throws -> T {
-        let (data, httpResponse) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = httpResponse as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse
-        }
-        
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw NetworkError.httpError(httpResponse.statusCode)
-        }
-        
-        let dto = try JSONDecoder().decode(T.self, from: data)
-        return dto
-    }
-}

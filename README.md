@@ -1,11 +1,8 @@
  The app helps users create a to-do list. Its home screen is a placeholder that allows navigation to the list screen. Once on the list screen, users can add, delete, and edit tasks. It also allows toggling between hiding completed tasks or active ones. Additionally, users can drag cells in the list to mark tasks as complete or rearrange their order.
 
+[Demo](![Simulator Screen Recording - iPhone 16 - 2024-10-18 at 14 15 06](https://github.com/user-attachments/assets/ed2bf3f4-bd8d-4e3f-a76e-e6884c935b34))
 
-
-https://github.com/user-attachments/assets/62856444-94b6-473e-8f29-2844a0d45e9e
-https://github.com/user-attachments/assets/5799e184-9e4e-4fdd-b087-4aa2ff1ac9c0
-
-
+[Demo 2](![Simulator Screen Recording - iPhone 16 - 2024-10-18 at 14 14 33](https://github.com/user-attachments/assets/44f395ef-55b3-408d-9c77-1a95e28f320c))
 
  # Technical Considerations
 

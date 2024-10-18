@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA5071542CC0B48100AFE832 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = CA5071532CC0B48100AFE832 /* Factory */; };
 		CA5071622CC2367400AFE832 /* Modules in Frameworks */ = {isa = PBXBuildFile; productRef = CA5071612CC2367400AFE832 /* Modules */; };
+		CA50717B2CC2CF5800AFE832 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CA50717A2CC2CF5800AFE832 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		CA44556D2CBA19FC001AE1CD /* TodosChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4455772CBA19FC001AE1CD /* TodosChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5071602CC2335800AFE832 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Modules; path = ../Modules; sourceTree = SOURCE_ROOT; };
+		CA50717A2CC2CF5800AFE832 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,6 +98,7 @@
 		CA4455542CBA19FB001AE1CD = {
 			isa = PBXGroup;
 			children = (
+				CA50717A2CC2CF5800AFE832 /* README.md */,
 				CA5071602CC2335800AFE832 /* Modules */,
 				CA44555F2CBA19FB001AE1CD /* TodosChallenge */,
 				CA4455702CBA19FC001AE1CD /* TodosChallengeTests */,
@@ -247,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA50717B2CC2CF5800AFE832 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +444,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,6 +475,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -12,10 +12,6 @@ struct TodosChallengeApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
-//            SingleTodoListView(viewModel: SingleTodoViewModel(todos: TodosStub.todos))
-//            NavigationStack {
-//                TodosListsContainer(viewModel: TodosListsContainerViewModel(todos: TodosStub.todos))
-//            }
         }
     }
 }

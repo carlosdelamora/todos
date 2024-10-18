@@ -9,14 +9,11 @@ import XCTest
 @testable import TodosChallenge
 
 final class SingleListUITest: UserInterfaceTest {
-
-    
     func testAddTaskButtonTapp() {
         let _ = HomeScreen(app: app)
             .navigateSingleList()
             .verifyAddTaskButtonExists()
             .verifyMoreButtonExists()
     }
-
 }
 

@@ -72,12 +72,15 @@ struct SingleTodoListView: View {
                             }
                         }
                     }
+                    .accessibilityIdentifier("New todo")
                 }
                 .listStyle(.plain)
                 .scrollDismissesKeyboard(.interactively)
                 .onAppear {
                     self.scrollProxy = scrollProxy
                 }
+                .accessibilityElement(children: .contain)
+                .accessibilityIdentifier("SingleListView")
             }
             
             Divider()
@@ -97,6 +100,8 @@ struct SingleTodoListView: View {
             .foregroundStyle(Color.disabled)
             .frame(height: 56)
             .padding(.horizontal)
+            .background(Color.backgroundPrimary)
+            .accessibilityIdentifier("AddTask")
             Divider()
         }.toolbar {
             ToolbarItem(placement: .topBarTrailing) {

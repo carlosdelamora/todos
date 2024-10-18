@@ -17,6 +17,7 @@ struct HomeView: View {
                 ForEach(homeViewModel.listInfo) { listInfo in
                     NavigationLink(value: listInfo.id) {
                         RowContentView(listInfo.name)
+                            .accessibilityIdentifier(listInfo.name)
                     }
                 }
             }
@@ -26,6 +27,7 @@ struct HomeView: View {
                         .navigationTitle(listInfo.name)
                 }
             }
+            .accessibilityIdentifier("Lists collection")
         }.task {
             await homeViewModel.initalTask()
         }

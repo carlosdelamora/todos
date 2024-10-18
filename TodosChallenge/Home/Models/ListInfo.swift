@@ -13,8 +13,11 @@ struct ListInfo: Identifiable {
     let name: String
 }
 
+protocol ListInfoProviding {
+    func listInfos() async -> [ListInfo]
+}
 
-class DefaultListInfoProvider {
+class DefaultListInfoProvider: ListInfoProviding  {
     func listInfos() async -> [ListInfo] {
         [
             .init(id: UUID(), name: "Home"),
@@ -39,7 +42,7 @@ class HomeViewModel {
 
 extension Container {
     
-    var listInfoProvider: Factory<DefaultListInfoProvider> {
+    var listInfoProvider: Factory<ListInfoProviding> {
         self { DefaultListInfoProvider()}
     }
 }
